@@ -14,8 +14,13 @@
 package s3sync
 
 import (
+	"errors"
 	"strings"
 	"sync"
+)
+
+var (
+	ErrUnsupported = errors.New("unsupported")
 )
 
 type multiErr struct {

@@ -14,7 +14,7 @@ package s3sync
 
 import (
 	"context"
-	"errors"
+	"fmt"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -146,7 +146,7 @@ func (m *Manager) Sync(source, dest string) error {
 		return m.syncLocalToS3(ctx, chJob, source, destS3Path)
 	}
 
-	return errors.New("local to local sync is not supported")
+	return fmt.Errorf("local to local sync is not supported: %w", ErrUnsupported)
 }
 
 // GetStatistics returns the structure that contains the sync statistics
