@@ -3,7 +3,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//	http://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -76,8 +76,13 @@ type fileOp struct {
 
 // New returns a new Manager.
 func New(sess *session.Session, options ...Option) *Manager {
+	return NewFromClient(s3.New(sess), options...)
+}
+
+// NewFromClient returns a new Manager based on a given S3 Client
+func NewFromClient(s3Client *s3.S3, options ...Option) *Manager {
 	m := &Manager{
-		s3:        s3.New(sess),
+		s3:        s3Client,
 		nJobs:     DefaultParallel,
 		guessMime: true,
 	}
